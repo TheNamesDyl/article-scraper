@@ -1,0 +1,6 @@
+try {
+     InputStream input = new URL("http://www.somewebsite.com/a.txt").openStream();
+     PdfReader pdf = new PdfReader(input);
+} catch (Exception e) {
+
+}
