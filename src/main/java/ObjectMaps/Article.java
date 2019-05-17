@@ -1,7 +1,7 @@
 package ObjectMaps;
 
 /**
- * A class that represents an article
+ * An object representing the scraped data from an article
  */
 public class Article {
 

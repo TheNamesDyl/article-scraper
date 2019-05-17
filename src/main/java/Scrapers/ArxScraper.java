@@ -34,7 +34,7 @@ public class ArxScraper extends ArticleScraper {
             throw new IllegalArgumentException();
         }
 
-        HtmlPage page = ScraperUtils.loadPage(category, WebScraper.AvailableScrapingLinks.ARX_URL);
+        HtmlPage page = ScraperUtils.loadPage(category, WebScraper.AvailableScrapingLink.ARX_URL);
 
         List<String> titles = scrapeTitles(amount, page);
         List<String> authors = scrapeAuthors(amount, page);

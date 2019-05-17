@@ -9,9 +9,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class ScraperUtils {
 
-    protected static HtmlPage loadPage(Category category, WebScraper.AvailableScrapingLinks link) {
-        if (link.toString().equals(WebScraper.AvailableScrapingLinks.ARX_URL.toString())) {
-            return getElementsOnSite(WebScraper.AvailableScrapingLinks.ARX_URL + "/" + category.getArxCategoryLink() + "/recent");
+    protected static HtmlPage loadPage(Category category, WebScraper.AvailableScrapingLink link) {
+        if (link.toString().equals(WebScraper.AvailableScrapingLink.ARX_URL.toString())) {
+            return getElementsOnSite(WebScraper.AvailableScrapingLink.ARX_URL + "/list/" + category.getArxCategoryLink() + "/recent");
         }
         return null;
     }

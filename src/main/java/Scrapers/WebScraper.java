@@ -15,8 +15,8 @@ public class WebScraper {
     /**
      * Contains all the links currently being scraped
      */
-    public enum AvailableScrapingLinks {
-        ARX_URL("https://arxiv.org/list/", new ArxScraper());
+    public enum AvailableScrapingLink {
+        ARX_URL("https://arxiv.org/", new ArxScraper());
 
         private final String link;
         private ArticleScraper scraper;
@@ -25,7 +25,7 @@ public class WebScraper {
          * @param link The link to the specified site
          * @param scraper an initialized object for the scraper used for this url
          */
-        AvailableScrapingLinks(final String link, ArticleScraper scraper) {
+        AvailableScrapingLink(final String link, ArticleScraper scraper) {
             this.link = link;
             this.scraper = scraper;
         }
@@ -56,19 +56,17 @@ public class WebScraper {
      *         Second map will be null if no items in that category
      * @throws IllegalArgumentException if category is null
      */
-    public static Map<Category, List<Article>> scrapeAllSites(int amount, Category category) {
+    public static List<Article> scrapeAllSites(int amount, Category category) {
         if (category == null) {
             throw new IllegalArgumentException();
         }
 
-        Map<Category, List<Article>> result = new HashMap<Category, List<Article>>();
         List<Article> aggregate = new ArrayList<Article>();
-        for (AvailableScrapingLinks links : AvailableScrapingLinks.values()) {
+        for (AvailableScrapingLink links : AvailableScrapingLink.values()) {
             aggregate.addAll(links.getScraper().scrapeData(amount, category));
         }
-        result.put(category, aggregate);
 
-        return result;
+        return aggregate;
     }
 
 
@@ -83,16 +81,13 @@ public class WebScraper {
      *         Second map will be null if no items in that category
      * @throws IllegalArgumentException if category is null
      */
-    public static Map<Category, List<Article>> scrapeSite(int amount, Category category, AvailableScrapingLinks link) {
+    public static List<Article> scrapeSite(int amount, Category category, AvailableScrapingLink link) {
         if (category == null) {
             throw new IllegalArgumentException();
         }
 
-        Map<Category, List<Article>> articles = new HashMap<Category, List<Article>>();
-        articles.put(category, link.scraper.scrapeData(amount, category));
 
-
-        return articles;
+        return link.scraper.scrapeData(amount, category);
     }
 
 
